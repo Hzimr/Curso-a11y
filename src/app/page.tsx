@@ -2,16 +2,18 @@ import Image from 'next/image'
 
 import LogoImg from '@/assets/logo.svg'
 
-import styles from '@/app/Home.module.css'
-
 export default function Home() {
   return (
     // className="flex min-h-screen flex-col p-8"
     <>
       <header className="py-6 px-5 flex items-center justify-between max-w-[1064px] w-full my-0 mx-auto">
         <Image src={LogoImg} alt="Blog da Rocketseat" width={286 / 2} />
-        <nav className={styles.nav}>
-          <a href="https://github.com/hzimr" aria-label="Acessar o Github">
+        <nav className="">
+          <a
+            href="https://github.com/hzimr"
+            aria-label="Acessar o Github"
+            className="text-[#8257e5]"
+          >
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -31,15 +33,17 @@ export default function Home() {
         </nav>
       </header>
       <main className="mb-10">
-        <article className={styles.content}>
+        <article className="my-0 mx-auto w-full max-w-[786px] py-6 px-5">
           <header>
-            <h1>Não Desenvolvendo uma web acessível</h1>
-            <h2>
+            <h1 className="mb-5 text-2xl font-bold">
+              Não Desenvolvendo uma web acessível
+            </h1>
+            <h2 className="mb-5 text-xl font-bold">
               Protocolos e diretrizes orientam o desenvolvimento de tecnologias
               acessíveis, mas é preciso olhar para além de tudo isso
             </h2>
           </header>
-          <p>
+          <p className="my-5 mx-0">
             Acessibilidade se tornou uma tendência no ecossistema tecnológico
             mundial, diversas empresas passaram a adotar critérios de
             desenvolvimento acessível em seus projetos — por uma questão prática
@@ -47,7 +51,7 @@ export default function Home() {
             consciência do que de fato é inclusivo na internet para pessoas com
             deficiências.
           </p>
-          <p>
+          <p className="my-5 mx-0">
             Para abordar este tema, é preciso ter uma perspectiva cultural sobre
             o assunto, não encará-lo apenas na ótica técnica ou prática.
             Acessibilidade passou a ser vista como um desafio (ou tendência)
@@ -55,7 +59,9 @@ export default function Home() {
             condiz com os princípios básicos da web: acessível para humanos. Tal
             afirmação está na W3C.
           </p>
-          <h3>O que é acessibilidade, afinal?</h3>
+          <h3 className="text-lg font-semibold">
+            O que é acessibilidade, afinal?
+          </h3>
         </article>
       </main>
       <footer className="py-6 px-5 flex items-center justify-between max-w-[1064px] w-full my-0 mx-auto">
