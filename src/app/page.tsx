@@ -2,17 +2,23 @@
 import Image from 'next/image'
 
 import LogoImg from '@/assets/logo.svg'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const modalRef = useRef<HTMLDivElement>(null)
 
   function handleModalOpen() {
     setIsModalOpen(!isModalOpen)
   }
 
+  useEffect(() => {
+    if (isModalOpen) {
+      modalRef?.current?.focus()
+    }
+  }, [isModalOpen])
+
   return (
-    // className="flex min-h-screen flex-col p-8"
     <>
       <header className="py-6 px-5 flex items-center justify-between max-w-[1064px] w-full my-0 mx-auto">
         <Image src={LogoImg} alt="Blog da Rocketseat" width={286 / 2} />
@@ -76,6 +82,7 @@ export default function Home() {
         <nav aria-label="Rodapé">
           <button
             type="button"
+            aria-controls="modal-1"
             onClick={handleModalOpen}
             className="text-xl py-4 px-8 bg-transparent rounded-md text-[#996dff]"
           >
@@ -85,9 +92,21 @@ export default function Home() {
       </footer>
 
       {isModalOpen && (
-        <div className="text-[#555] fixed top-1/2 left-1/22 transform translate-x-[40vw] -translate-y-[20vh] bg-white p-32 rounded-md">
-          <h2 className="text-2xl font-bold">Termos de uso</h2>
-          <p className="text-lg">Esses sãos os termos de uso</p>
+        <div
+          role="dialog"
+          id="modal-1"
+          aria-labelledby="modal1Title"
+          arial-describedby="modal1Description"
+          tabIndex={-1}
+          ref={modalRef}
+          className="focus:outline-none focus:ring focus:ring-violet-300 text-[#555] fixed top-1/2 left-1/22 transform translate-x-[40vw] -translate-y-[20vh] bg-white p-32 rounded-md"
+        >
+          <h2 id="modal1Title" className="text-2xl font-bold">
+            Termos de uso
+          </h2>
+          <p id="modal1Description" className="text-lg">
+            Esses sãos os termos de uso
+          </p>
         </div>
       )}
     </>
