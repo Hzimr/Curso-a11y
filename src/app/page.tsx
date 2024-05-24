@@ -1,8 +1,16 @@
+'use client'
 import Image from 'next/image'
 
 import LogoImg from '@/assets/logo.svg'
+import { useState } from 'react'
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  function handleModalOpen() {
+    setIsModalOpen(!isModalOpen)
+  }
+
   return (
     // className="flex min-h-screen flex-col p-8"
     <>
@@ -66,15 +74,22 @@ export default function Home() {
       </main>
       <footer className="py-6 px-5 flex items-center justify-between max-w-[1064px] w-full my-0 mx-auto">
         <nav aria-label="Rodapé">
-          <a
-            href="https://github.com/hzimr"
-            aria-label="Acessar o Github"
-            className="py-4 px-8 bg-[#202024] rounded-md text-[#99699f]"
+          <button
+            type="button"
+            onClick={handleModalOpen}
+            className="text-xl py-4 px-8 bg-transparent rounded-md text-[#996dff]"
           >
             Termos de uso
-          </a>
+          </button>
         </nav>
       </footer>
+
+      {isModalOpen && (
+        <div className="text-[#555] fixed top-1/2 left-1/22 transform translate-x-[40vw] -translate-y-[20vh] bg-white p-32 rounded-md">
+          <h2 className="text-2xl font-bold">Termos de uso</h2>
+          <p className="text-lg">Esses sãos os termos de uso</p>
+        </div>
+      )}
     </>
   )
 }
