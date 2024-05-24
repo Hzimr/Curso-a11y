@@ -2,22 +2,9 @@
 import Image from 'next/image'
 
 import LogoImg from '@/assets/logo.svg'
-import { useEffect, useRef, useState } from 'react'
+import * as Dialog from '@radix-ui/react-dialog'
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const modalRef = useRef<HTMLDivElement>(null)
-
-  function handleModalOpen() {
-    setIsModalOpen(!isModalOpen)
-  }
-
-  useEffect(() => {
-    if (isModalOpen) {
-      modalRef?.current?.focus()
-    }
-  }, [isModalOpen])
-
   return (
     <>
       <header className="py-6 px-5 flex items-center justify-between max-w-[1064px] w-full my-0 mx-auto">
@@ -80,35 +67,27 @@ export default function Home() {
       </main>
       <footer className="py-6 px-5 flex items-center justify-between max-w-[1064px] w-full my-0 mx-auto">
         <nav aria-label="Rodapé">
-          <button
-            type="button"
-            aria-controls="modal-1"
-            onClick={handleModalOpen}
-            className="text-xl py-4 px-8 bg-transparent rounded-md text-[#996dff]"
-          >
-            Termos de uso
-          </button>
+          <Dialog.Root>
+            <Dialog.Trigger className="text-xl py-4 px-8 bg-transparent rounded-md text-[#996dff]">
+              Termos de uso
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className="bg-[#00000080] fixed inset-0" />
+              <Dialog.Content className="focus:outline-none focus:ring focus:ring-violet-300 text-[#555] fixed top-1/2 left-1/22 transform translate-x-[40vw] -translate-y-[20vh] bg-white p-32 rounded-md">
+                <Dialog.Title className="text-2xl font-bold">
+                  Termos de uso
+                </Dialog.Title>
+                <Dialog.Description className="text-lg">
+                  Esses sãos os termos de uso
+                </Dialog.Description>
+                <Dialog.Close className="font-bold text-xl text-white rounded-md bg-[#8257e5] w-full py-3 px-5 mt-5 ">
+                  Fechar
+                </Dialog.Close>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
         </nav>
       </footer>
-
-      {isModalOpen && (
-        <div
-          role="dialog"
-          id="modal-1"
-          aria-labelledby="modal1Title"
-          arial-describedby="modal1Description"
-          tabIndex={-1}
-          ref={modalRef}
-          className="focus:outline-none focus:ring focus:ring-violet-300 text-[#555] fixed top-1/2 left-1/22 transform translate-x-[40vw] -translate-y-[20vh] bg-white p-32 rounded-md"
-        >
-          <h2 id="modal1Title" className="text-2xl font-bold">
-            Termos de uso
-          </h2>
-          <p id="modal1Description" className="text-lg">
-            Esses sãos os termos de uso
-          </p>
-        </div>
-      )}
     </>
   )
 }
